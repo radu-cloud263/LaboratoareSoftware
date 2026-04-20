@@ -1,4 +1,6 @@
-package lab5.advanced;
+package ro.ulbs.proiectaresoftware.lab6.advanced;
+
+
 
 public class Lab5Adv {
     static void main(String[] args) {

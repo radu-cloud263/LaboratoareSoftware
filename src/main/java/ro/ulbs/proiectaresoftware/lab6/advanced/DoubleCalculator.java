@@ -1,4 +1,4 @@
-package lab5.advanced;
+package ro.ulbs.proiectaresoftware.lab6.advanced;
 
 public class DoubleCalculator  extends ACalculator<Double> {
     @Override

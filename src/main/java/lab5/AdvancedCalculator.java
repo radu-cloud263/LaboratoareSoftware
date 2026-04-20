@@ -1,40 +1,44 @@
 package lab5;
 
-public class AdvancedCalculator extends IntCalculator{
-    public AdvancedCalculator(int state) {
-        super(state);
+public class AdvancedCalculator extends IntCalculator {
+
+    public  AdvancedCalculator(){
+        super();
+    }
+
+    public  AdvancedCalculator(int a) {
+        super(a);
     }
 
     @Override
-    public AdvancedCalculator add(int x) {
-        super.add(x);
+    public AdvancedCalculator add(int a) {
+        super.add(a);
         return this;
     }
 
     @Override
-    public AdvancedCalculator substract(int x) {
-        super.substract(x);
+    public AdvancedCalculator subtract(int a) {
+        super.subtract(a);
         return this;
     }
 
     @Override
-    public AdvancedCalculator multiply(int x) {
-        super.multiply(x);
+    public AdvancedCalculator multiply(int a) {
+        super.multiply(a);
         return this;
     }
 
-    public AdvancedCalculator divide(int x) {
-        state/= x;
+    public AdvancedCalculator divide(int a){
+        if (a != 0) {
+            super.state /= a;
+        }
         return this;
     }
 
-    public AdvancedCalculator putere(int x) {
-        state = (int)Math.pow(state, x);
-        return this;
-    }
-
-    public AdvancedCalculator radical(int x) {
-        state = (int)Math.pow(state, 1.0/x);
+    public AdvancedCalculator root(int n){
+        if (n != 0) {
+            state = (int) Math.pow(state, 1.0 / n);
+        }
         return this;
     }
 }

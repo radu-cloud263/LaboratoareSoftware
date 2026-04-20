@@ -1,35 +1,30 @@
 package lab5;
 
 public class IntCalculator {
-    int state;
+    protected int state = 0;
 
-    public int result() {
-        return state;
+    public IntCalculator() {
     }
 
-    public void clear() {
-        state = 0;
+    public IntCalculator(int value) {
+        this.state = value;
     }
 
-    public IntCalculator add(int x) {
-        state += x;
+    public IntCalculator add(int a) {
+        this.state = this.state + a;
         return this;
     }
 
-    public IntCalculator substract(int x) {
-        state -= x;
+    public IntCalculator subtract(int a) {
+        this.state = this.state - a;
+        return this;
+    }
+    public IntCalculator multiply(int a) {
+        this.state = this.state * a;
         return this;
     }
 
-    public IntCalculator multiply(int x) {
-        state *= x;
-        return this;
+    public int result(){
+        return this.state;
     }
-
-    public IntCalculator(int state)
-    {
-        this.state = state;
-    }
-
-
 }

@@ -1,4 +1,4 @@
-package lab5.advanced;
+package ro.ulbs.proiectaresoftware.lab6.advanced;
 
 public abstract class ACalculator<T> {
     Object state;
