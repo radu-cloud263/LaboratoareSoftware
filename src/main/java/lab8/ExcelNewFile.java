@@ -12,7 +12,9 @@ public class ExcelNewFile {
     public static void main(String[] args) {
         String inputFileName = "laborator8_input.xlsx";
         String outputFileName = "laborator8_output2.xlsx";
+        String outputFileName2 = "laborator8_output3.xlsx";
         generateOutputWithAverage(inputFileName, outputFileName);
+        generateOutputWithFormulaAverage(inputFileName, outputFileName2);
     }
 
     public static void generateOutputWithAverage(String inputPath, String outputPath) {
@@ -77,6 +79,49 @@ public class ExcelNewFile {
         }
     }
 
+
+    public static void generateOutputWithFormulaAverage(String inputPath, String outputPath) {
+        try (FileInputStream fis = new FileInputStream(new File(inputPath));
+             Workbook inputWorkbook = new XSSFWorkbook(fis);
+             Workbook outputWorkbook = new XSSFWorkbook()) {
+
+            Sheet inputSheet = inputWorkbook.getSheetAt(0);
+            Sheet outputSheet = outputWorkbook.createSheet("Rezultate Formule");
+
+            int rowNum = 0;
+            for (Row inputRow : inputSheet) {
+                Row outputRow = outputSheet.createRow(rowNum++);
+                int lastCellNum = 0;
+
+                for (int i = 0; i < inputRow.getLastCellNum(); i++) {
+                    Cell inputCell = inputRow.getCell(i);
+                    Cell outputCell = outputRow.createCell(i);
+
+                    if (inputCell != null) {
+                        copyCellValue(inputCell, outputCell);
+                    }
+                    lastCellNum = i;
+                }
+
+                Cell formulaCell = outputRow.createCell(lastCellNum + 1);
+
+                if (inputRow.getRowNum() == 0) {
+                    formulaCell.setCellValue("Media (Formula)");
+                } else {
+                    int excelRowNumber = inputRow.getRowNum() + 1;
+                    String formula = "AVERAGE(D" + excelRowNumber + ":F" + excelRowNumber + ")";
+                    formulaCell.setCellFormula(formula);
+                }
+            }
+
+            try (FileOutputStream fos = new FileOutputStream(outputPath)) {
+                outputWorkbook.write(fos);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private static void copyCellValue(Cell oldCell, Cell newCell) {
         switch (oldCell.getCellType()) {
